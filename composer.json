@@ -1,0 +1,19 @@
+{
+    "name": "rudy-onfroy/db-viewer-cleaner-bundle",
+    "authors": [
+        {
+            "name": "Rudy Onfroy",
+            "email": "rudy@onfroy.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.9",
+        "symfony/form": "~2.3|~3.0",
+        "symfony/framework-bundle": "~2.3|~3.0",
+        "symfony/security-bundle": "~2.3|~3.0",
+        "symfony/twig-bundle": "~2.3|~3.0"
+    },
+    "autoload": {
+        "psr-4": { "FOS\\UserBundle\\": "" }
+    },
+}
