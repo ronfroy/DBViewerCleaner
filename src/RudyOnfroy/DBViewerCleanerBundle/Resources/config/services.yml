@@ -1,0 +1,40 @@
+services:
+    db_viewer_cleaner.state.viewer:
+        class: RudyOnfroy\DBViewerCleanerBundle\State\ViewerState
+
+    db_viewer_cleaner.provider.viewer:
+        class: RudyOnfroy\DBViewerCleanerBundle\Provider\ViewerProvider
+        arguments:
+          - '@db_viewer_cleaner.state.viewer'
+          - %db_viewer_cleaner.config%
+          - '@request_stack'
+
+    db_viewer_cleaner.provider.query:
+        class: RudyOnfroy\DBViewerCleanerBundle\Provider\QueryProvider
+        arguments:
+          - '@db_viewer_cleaner.state.viewer'
+          - '@db_viewer_cleaner.provider.viewer'
+
+    db_viewer_cleaner.provider.result:
+        class: RudyOnfroy\DBViewerCleanerBundle\Provider\ResultProvider
+        arguments:
+          - '@db_viewer_cleaner.provider.query'
+          - '@doctrine.dbal.default_connection'
+
+    db_viewer_cleaner.provider.param:
+        class: RudyOnfroy\DBViewerCleanerBundle\Provider\ParamProvider
+        arguments:
+          - '@db_viewer_cleaner.state.viewer'
+          - '@form.factory'
+          - '@db_viewer_cleaner.provider.viewer'
+
+    db_viewer_cleaner.controller.query:
+          class: RudyOnfroy\DBViewerCleanerBundle\Controller\QueryController
+          arguments:
+            - '@db_viewer_cleaner.state.viewer'
+            - '@request_stack'
+            - '@templating'
+            - '@db_viewer_cleaner.provider.param'
+            - '@db_viewer_cleaner.provider.viewer'
+            - '@db_viewer_cleaner.provider.query'
+            - '@db_viewer_cleaner.provider.result'

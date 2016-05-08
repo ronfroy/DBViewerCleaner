@@ -1,0 +1,6 @@
+db_viewer_cleaner_query_show:
+    path:     /{viewerId}/{queryId}
+    defaults: { _controller: db_viewer_cleaner.controller.query:showAction }
+    requirements:
+        viewerId:  \d+
+        queryId:  \d+
